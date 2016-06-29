@@ -1,4 +1,4 @@
-module.exports = function Game(numberOfPlayers){
+export default function Game(numberOfPlayers){
   var numberOfPlayersInGame = numberOfPlayers;
   return {
     id: Math.floor(Math.random() * 100000000),
