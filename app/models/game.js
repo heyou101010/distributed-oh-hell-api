@@ -1,7 +1,7 @@
 export default class Game {
   constructor(players, id) {
     this._players = players;
-    this._id;
+    this._id = id;
   }
   
   get players() {
