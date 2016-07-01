@@ -27,7 +27,6 @@ export default class Game {
   }
   
   get topHand() {
-    let topHands = [0, 0, 0, 0, 10, 8, 7, 6, 5];
-    return topHands[this._players.length];
+    return Math.floor(51/this._players.length);
   }
 }
