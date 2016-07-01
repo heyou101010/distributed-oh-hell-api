@@ -29,4 +29,13 @@ export default class Game {
   get topHand() {
     return Math.floor(51/this._players.length);
   }
+  
+  toJSON() {
+    let gameObject = {
+      id: this._id,
+      players: this._players.map(player => player.toJSON())
+    };
+    
+    return JSON.stringify(gameObject);
+  }
 }

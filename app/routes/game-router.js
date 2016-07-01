@@ -28,7 +28,7 @@ router.get('/help', (req, res) => {
     'post /' : 'create a game',
     'put /:id' : 'update a game',
     'delete /:id' : 'delete a game',
-    'json' : JSON.stringify({id : 'gameId'})
+    'json' : JSON.stringify({id : 'gameId', players: 'player array'})
   });
 });
 

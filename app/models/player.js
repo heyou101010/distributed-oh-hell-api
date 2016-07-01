@@ -29,4 +29,14 @@ export default class Player {
   set id(playerId) {
     this._id = playerId;
   }
+  
+  toJSON() {
+    let playerObject = {
+      id: this._id,
+      name: this._name,
+      token: this._token
+    };
+    
+    return JSON.stringify(playerObject);
+  }
 }
