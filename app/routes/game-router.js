@@ -7,8 +7,8 @@ DELETE  games/:id
 */
 
 import express from 'express';
-import { game } from '../models/game';
-
+import Game from '../models/game';
+import GameDAO from '../dal/gameDao';
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-  res.json({ message: 'get all the games!' });
+  res.json({ games: global.games });
 });
 
 router.get('/help', (req, res) => {
@@ -33,11 +33,33 @@ router.get('/help', (req, res) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  res.json({ message: 'get game ' + req.path});
+  
+  const gameDAO = new GameDAO();
+  const gamePromise = gameDAO.findGameById(req.params.id);
+  console.log(typeof req.params.id);
+  
+  gamePromise.then(
+    function resolve(game){
+      res.json(game);
+    }, function reject(errorMsg){
+      res.status(404).send({error: errorMsg});
+    }
+  );
+  
 });
 
 router.post('/', (req, res, next) => {
-  res.json({ message: 'create a new game'});
+  let gameDAO = new GameDAO();
+  let gamePromise = gameDAO.upsertGame(new Game(req.body.players));
+  
+  gamePromise.then(
+    function resolve(game){
+      res.json(game);
+    }, function reject(errorMsg){
+      res.status(404).send({error: errorMsg});
+    }
+  );
+  
 });
 
 router.put('/:id', (req, res, next) => {
@@ -47,5 +69,6 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   res.json({ message: 'delete game ' + req.path});
 });
+
 
 export default router;

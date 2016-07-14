@@ -1,7 +1,9 @@
+import Player from './player';
+
 export default class Game {
   constructor(players, id) {
-    this._players = players;
-    this._id = id;
+    this._players = players || [];
+    this._id = id || null;
   }
   
   get players() {
@@ -10,6 +12,12 @@ export default class Game {
   
   set players(playerArray) {
     this._players = playerArray;
+  }
+  
+  addPlayer(player) {
+    if (player instanceof Player) {
+      this._players.push(player);
+    }
   }
   
   get id() {
@@ -21,21 +29,10 @@ export default class Game {
   }
   
   get numberOfPlayers() {
-    if (this._players) {
-      return this._players.length;
-    }
+    return this._players.length;
   }
   
   get topHand() {
     return Math.floor(51/this._players.length);
-  }
-  
-  toJSON() {
-    let gameObject = {
-      id: this._id,
-      players: this._players.map(player => player.toJSON())
-    };
-    
-    return JSON.stringify(gameObject);
   }
 }
