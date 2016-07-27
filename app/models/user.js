@@ -1,7 +1,8 @@
 export default class User {
-    constructor(firstName, lastName, id) {
+    constructor(firstName, lastName, token, id) {
       this._firstName = firstName;
       this._lastName = lastName;
+      this._token = token;
       this._id = id;
     }
     
@@ -19,6 +20,14 @@ export default class User {
     
     set lastName(userLastName) {
       this._lastName = userLastName;
+    }
+    
+    get token() {
+      return this._token;
+    }
+    
+    set token(token) {
+      this._token = token;
     }
     
     get id() {

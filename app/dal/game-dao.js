@@ -1,6 +1,5 @@
 import Game from '../models/game';
 
-
 export default class GameDAO {
   
   constructor() {

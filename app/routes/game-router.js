@@ -1,14 +1,6 @@
-/*
-GET     games
-GET     games/:id
-POST    games
-PUT     games/:id
-DELETE  games/:id
-*/
-
 import express from 'express';
 import Game from '../models/game';
-import GameDAO from '../dal/gameDao';
+import GameDAO from '../dal/game-dao';
 const router = express.Router();
 
 router.use((req, res, next) => {
